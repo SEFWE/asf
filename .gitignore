@@ -1,23 +1,75 @@
-# Compiled class file
-*.class
+Git本地常用操作指令
 
-# Log file
-*.log
+1、创建git库
 
-# BlueJ files
-*.ctxt
+　　git init  #在当前目录中生成一个.git 目录（含有.git目录的目录即是git仓库）
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+2、注册git用户
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+--->用于在团队合作开发中，表明代码作者。
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+　　git config --global user.name XXX  #用户名
+
+　　git config --global user.email XXX   #用户邮箱
+
+　　git config --list  #查看用户信息
+
+注：加--global，全局设置。
+
+3、向git库添加修改
+
+　　git add [path］ #会把对应目录或文件，添加到stage状态
+　　git add .  #会把当前所有的untrack files和changed but not updated添加到stage状态
+
+实际上是为修改内容添加index索引。
+
+4、向版本库提交修改
+
+　　git commit –m “XXXX”     #提交修改,添加注释
+
+注：git 提示： 未有add红色字体，未有commit绿色字体，已提交则worktree是干净的
+
+5、查看当前代码库的状态
+
+　　git status
+
+6、查看版本信息
+
+　　--->实际是查看修改提交信息
+
+　　git log
+
+　　git log --graph  #以图形化（节点）展示当前git库的提交信息。
+
+7、查看指定版本信息
+
+　　git show sdjf974654dd….  #(show后面为每次提交系统自动生成的一串哈希值)
+
+　　git show sdji97 #一般只使用版本号的前几个字符即可
+
+8、撤销修改
+
+　　git reset
+（1）撤销整体修改
+git reset --hard  #回到原来编辑的地方,改动会丢失。（同样适用于团队对于其他人
+的修改恢复）
+
+git reset --hard sdv143kvf…... #可回到指定的版本#(hard后面为每次提交系统自
+动生成的一串哈希值)
+     git reset [path] 会改变path指定的文件或目录的stage状态，到非stage状态。
+     git reset 会将所有stage的文件状态，都改变成非stage状态。
+
+（2）撤销某次修改
+    回退1个change的写法就是git reset HEAD^，
+    2个为HEAD^^，
+    3个为HEAD~3，以此类推。
+
+9、向远端库推送修改（提交修改）
+
+　　git push origin 分支名
+
+10、暂存修改
+
+　　git stash可以把当前的改动（stage和unstage，但不包括untrack的文件）暂存。
+
+　　然后通过git stash list查看。
